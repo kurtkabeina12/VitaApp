@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "VitaApp",
-    "slug": "VitaApp",
+    "slug": "vitaapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -30,6 +30,12 @@
     },
     "plugins": [
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d3aa9f0a-ff3a-4f53-94df-9d2093d71fb5"
+      }
+    },
+    "owner": "yanaavetisyan"
   }
 }

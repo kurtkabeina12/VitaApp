@@ -1,9 +1,9 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Platform, ScrollView, FlatList} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Platform, ScrollView, FlatList, TextInput} from 'react-native';
 import { Avatar, Card, Image, Input } from 'react-native-elements';
 import * as Device from "expo-device";
 import { deleteGCVPToken, getUUID } from "../SecureStorageService";
-import {MaterialCommunityIcons} from "@expo/vector-icons";
+import {AntDesign, MaterialCommunityIcons} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
 
 export default function InfoForGroupScreen({ route }) {
@@ -16,6 +16,8 @@ export default function InfoForGroupScreen({ route }) {
   const [showMedia, setShowMedia] = useState(false);
   const [mediaImages, setMediaImages] = useState([]);
   const [flatListKey, setFlatListKey] = useState(0);
+  const [showSearchInput, setShowSearchInput] = useState(false);
+  const [searchItem, setSearchItem] = useState('');
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -113,6 +115,10 @@ export default function InfoForGroupScreen({ route }) {
     setFlatListKey(prevKey => prevKey +  1);
   }
 
+  const searchMessage = () => {
+  setShowSearchInput(!showSearchInput);
+  }
+
   const ShowDocuments = () => {
   }
 
@@ -176,6 +182,26 @@ export default function InfoForGroupScreen({ route }) {
         <TouchableOpacity onPress={ShowDocuments}>
           <Text style={{color: isDarkTheme ? "white" : "black", marginRight:10}}>Файлы</Text>
         </TouchableOpacity>
+        <AntDesign name="search1" size={24} onPress={searchMessage}  color={isDarkTheme ? "white" : "black"} />
+        {showSearchInput && (
+          <TextInput
+            style={{
+              flex: 1,
+              borderWidth: 1,
+              height: 40,
+              borderColor: isDarkTheme ? "#16161a" : "#dddddd",
+              borderRadius: 20,
+              color:isDarkTheme ? "white" : "black",
+              paddingHorizontal: 10,
+            }}
+            keyboardAppearance={isDarkTheme ? 'dark' : 'light'}
+            placeholderTextColor={isDarkTheme ? "#404040" : "black"}
+            backgroundColor={isDarkTheme ? "#1d1d21" : "#F0F0F0"}
+            placeholder='Поиск...'
+            onChangeText={setSearchItem}
+            value={searchItem}
+          />
+        )}
       </View>
       {showParticipants &&  isGroup && (
         <FlatList

@@ -403,13 +403,13 @@ export default function TestSocketScreen({route}) {
     if (longPressed) {
       navigation.setOptions({
         headerTitle: () => (
-          <View style={{flexDirection: 'row', gap: 40, marginLeft: 70}}>
+          <View style={{flexDirection: 'row'}}>
             <AntDesign name="close" onPress={closeHeader} size={24} color={isDarkTheme ? "white" : "black"}/>
             {/*<AntDesign name="pushpino" onPress={secureMessage} size={24} color={isDarkTheme ? "white" : "black"}/>*/}
           </View>
         ),
         headerRight: () => (
-          <View style={{flexDirection: 'row', gap: 40}}>
+          <View style={{flexDirection: 'row', gap: 30}}>
             <AntDesign name="delete" onPress={deleteMessage} size={24} color="#b91c1c"/>
             <Feather name="edit" size={24} onPress={changeMessage} color={isDarkTheme ? "white" : "black"}/>
           </View>
@@ -457,6 +457,7 @@ export default function TestSocketScreen({route}) {
     };
     socket.emit('del_msg', socketDelMsg)
   }, []);
+
 
   const closeHeader = async () => {
     setLongPressed(false);
